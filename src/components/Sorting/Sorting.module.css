@@ -1,0 +1,71 @@
+.container{
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: rgb(207, 130, 130);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgb(124, 59, 59);
+}
+
+.header {
+    color: black(0, 26, 255, 0.082);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+.buttonGroup{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 25px;
+   
+}
+.button{
+    padding: 10px 20px;
+    background-color: rgba(red, green, blue, alpha);
+    color: red;
+    border: none;
+    border-radius: 10px;
+    cursor: grab;
+    font-size: 1rem;
+     transition: all 0.3s ease;
+}
+.button:hover {
+    background-color: rgb(36, 77, 199);
+    transform: translateY(-2);
+
+}
+
+.list{
+    list-style: none ;
+    margin: 0;
+    padding: 0;
+
+
+}
+.listItem{
+    padding: 12px 15px;
+    margin:8px 0;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 5px rgba(red, green, blue, alpha);
+transition: all 0.2s ease;
+}
+.listItem:hover{
+    transform: rotateX(5px);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1);
+
+}
+
+.listItem span:first-child{
+font-weight: bold;
+color: rgb(70, 68, 172);
+}
+
+.listItem span:last-child {
+    color: #7f8c8d;
+  }
