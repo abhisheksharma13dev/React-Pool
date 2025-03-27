@@ -1,8 +1,9 @@
 
 "use client"
 
-import DataFetch from "@/components/DataFetch/DataFetch";
-import SortingData from "@/components/Sorting/SortingData";
+// import DataFetch from "@/components/DataFetch/DataFetch";
+import SideDrawer from "@/components/Drawer/Drawer";
+// import SortingData from "@/components/Sorting/SortingData";
 
 // import AllHooks from "@/components/Hooks/AllHooks";
 
@@ -14,6 +15,7 @@ export default function Home() {
      {/* <AllHooks/> */}
      {/* <SortingData/> */}
      {/* <DataFetch/> */}
+     <SideDrawer/>
       
       </div>
    
