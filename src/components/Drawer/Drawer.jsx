@@ -1,11 +1,3 @@
-// // const { Padding } = require("@mui/icons-material");
-// // const { useState } = require("react");
-// import { useState } from "react";
-// // import { Padding } from "@mui/icons-material";
-// import { Collapse, Divider, Drawer, ListItem, ListItemIcon, ListItemText } from "@mui/material";
-// import { Anchor } from "@mui/icons-material";
-
-
 import React, { useState } from 'react';
 import { 
   Dashboard as DashboardIcon,
@@ -18,7 +10,10 @@ import {
   Person as NameIcon,
   ExitToApp as LogoutIcon,
   KeyboardArrowDown as ArrowDownIcon,
-  KeyboardArrowUp as ArrowUpIcon
+  KeyboardArrowUp as ArrowUpIcon,
+  Menu as MenuIcon, // Import Menu icon for the slider button
+  ChevronLeft as ChevronLeftIcon, // Optional: Icon for closing
+
 } from '@mui/icons-material';
 import { 
   Drawer, 
@@ -28,37 +23,52 @@ import {
   ListItemText, 
   Collapse, 
   Divider,
-  styled 
+  styled,
+  IconButton, // Import IconButton for the button
+  Box, // Import Box for layout
 } from '@mui/material';
 
 const drawerWidth =240;
+const drawerCollapsedWidth = 60;
 
 const DrawerHeader = styled('div') (({theme}) => ({
     display: 'flex',
     alignItem: 'center',
         Padding: theme.spacing(0, 1),
         ...theme.mixins.toolbar, 
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-end'  // align slider button to the right
 }));
+
+
 
 
 const SideDrawer = () => {
     const [openProjects, setOpenProjects] = useState(false)
+    const [drawerOpen, setDrawerOpen] = useState(true)
 
 
     const handleProjectsClick = () => {
         setOpenProjects(!openProjects);
     };
+  const toggleDrawer = () =>{
+    setDrawerOpen(!drawerOpen);
+  };
 
     return (
-        <Drawer
+        <Drawer 
         sx = {{
-            width: drawerWidth,
+            width: drawerOpen ? drawerWidth: drawerCollapsedWidth,
             flexShrink: 0,
+            whiteSpace: 'nowrap',
             '& .MuiDrawer-paper': {
-                width: drawerWidth,
-                boxShadow: 'border-box',
+                width: drawerOpen?  drawerWidth : drawerCollapsedWidth,
+                overflowX: 'hidden',
+                transition: (theme) => theme.transitions.create('width', {
+                    easing: theme.transitions.easing.sharp,
+                    duration: theme.transitions.duration.enteringScreen,
+                }),
                 backgroundColor: '#2c3e50',
+                boxSizing: 'border-box',
                 color: 'white',
             },
         }}
@@ -66,12 +76,9 @@ const SideDrawer = () => {
         anchor="left"
         >
             <DrawerHeader>
-                <ListItem>
-                    <ListItemIcon>
-                        <NameIcon style= {{color: "white" }} />
-                    </ListItemIcon>
-                    <ListItemText primary="Name"/>
-                </ListItem>
+                <IconButton onClick={toggleDrawer}>
+                    {drawerOpen ? <ChevronLeftIcon style={{color: "white"}}/> : <MenuIcon style={{color: "white"}}/>}
+                </IconButton>
             </DrawerHeader>
 
             <Divider/>
@@ -79,7 +86,7 @@ const SideDrawer = () => {
 
             <List>
                 {/* {Dashboard} */}
-                <ListItem button >
+                <ListItem  >
                     <ListItemIcon>
                         <DashboardIcon style = {{color: "white"}} />
                         
@@ -89,7 +96,7 @@ const SideDrawer = () => {
 
                 {/* {projects with sections} */}
 
-                <ListItem button onClick = {handleProjectsClick}>
+                <ListItem   onClick = {handleProjectsClick}>
                     <ListItemIcon>
                         <ProjectsIcon style = {{color: "white"}} />
 
@@ -100,22 +107,22 @@ const SideDrawer = () => {
                 <Collapse in={openProjects} timeout="auto" unmountOnExit>
                 <List component = "div" disablePadding>
 
-                    <ListItem button sx={{pl: 4}}>
+                    <ListItem  sx={{pl: 4}}>
                         <ListItemText primary= "UI/UX" />
                     </ListItem>
 
-                    <ListItem button sx={{pl: 4}}>
+                    <ListItem sx={{pl: 4}}>
                         <ListItemText primary = "Python" />
                     </ListItem>
 
-                    <ListItem button sx={{pl: 4}}>
+                    <ListItem  sx={{pl: 4}}>
                         <ListItemText primary = "Java"/>
                     </ListItem>
                 </List>
                 </Collapse>
 
                 {/* {calander} */}
-                <ListItem button >
+                <ListItem >
                     <ListItemIcon>
                         <CalendarIcon style={{color: "white"}} />
 
@@ -124,7 +131,7 @@ const SideDrawer = () => {
                 </ListItem>
 
                 {/* {email} */}
-                <ListItem button >
+                <ListItem  >
                     <ListItemIcon>
                         <EmailIcon style={{color: "white"}} />
                     </ListItemIcon>
@@ -133,7 +140,7 @@ const SideDrawer = () => {
 
                 {/* {contact}  */}
 
-                <ListItem button >
+                <ListItem  >
                     <ListItemIcon>
                         <ContactIcon style={{color: "white"}} />
                    </ListItemIcon>
@@ -142,7 +149,7 @@ const SideDrawer = () => {
 
 
                 {/* {chat} */}
-                <ListItem button >
+                <ListItem  >
                     <ListItemIcon>
                         <ChatIcon style={{color: "white"}} />
                     </ListItemIcon>
@@ -151,9 +158,9 @@ const SideDrawer = () => {
 
                 {/* {file manager} */}
 
-                <ListItem button>
+                <ListItem >
                     <ListItemIcon>
-                        <FileManagerIcon style={{color: "white"}} />
+                        <FileManagerIcon style={{color: "white"}} />    
                     </ListItemIcon>
                     <ListItemText primary = "File Manager"/>
                 </ListItem>
@@ -165,7 +172,7 @@ const SideDrawer = () => {
             {/* {logout section} */}
 
  <List style={{marginTop: 'auto'}}>
-        <ListItem button >
+        <ListItem  >
             <ListItemIcon>
                 <LogoutIcon style={{color: "white"}} />
 
@@ -176,9 +183,6 @@ const SideDrawer = () => {
   </Drawer>
 
 
-
     )
 }
-
-
 export default SideDrawer;
